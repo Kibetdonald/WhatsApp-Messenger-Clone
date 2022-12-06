@@ -31,9 +31,8 @@ export default function HeaderComponent() {
           </View>
         </View>
       </View>
-      
+
       <View style={{ height: 780 }}>
-        {/* <NavigationContainer independent={true}> */}
           <Tab.Navigator
             initialRouteName="Message"
             screenOptions={{
@@ -70,20 +69,6 @@ export default function HeaderComponent() {
               options={{ tabBarLabel: "CALLS" }}
             />
           </Tab.Navigator>
-        <NavigationContainer independent={true}>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="header"
-            component={HeaderComponent}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="chat"
-            component={ChatScreen}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
       </View>
     </View>
   );

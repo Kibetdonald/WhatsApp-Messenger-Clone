@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function MessageScreen() {
   const navigation = useNavigation();
   const openChat = () => {
-    navigation.navigate("chat");
+    navigation.push("chat");
   };
   const renderItem = ({ item }) => (
     <Item
