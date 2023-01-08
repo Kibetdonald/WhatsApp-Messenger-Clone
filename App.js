@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ChatScreen from "./src/screens/ChatScreen";
 import MessageScreen from "./src/screens/MessageScreen";
 import HeaderComponent from "./src/components/HeaderComponent";
+import ModalComponent from "./src/components/ModalComponent";
+import ViewStatus from "./src/screens/ViewStatus";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +24,12 @@ export default function App() {
             component={ChatScreen}
             options={{ headerShown: false }}
           />
+             <Stack.Screen
+            name="status"
+            component={ViewStatus}
+            options={{ headerShown: false }}
+          />
+           <Stack.Screen name="Modal" component={ModalComponent} />
         </Stack.Navigator>
       </NavigationContainer>
   );

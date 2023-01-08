@@ -1,37 +1,53 @@
-import { View, Text, FlatList, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Image,
+  Pressable,
+} from "react-native";
 import React from "react";
 import chats from "../data/groups.json";
+import { useNavigation } from "@react-navigation/native";
 
-const Item = ({ name, image, message, unread, time }) => (
-  <View style={styles.item}>
-    <Image
-      style={styles.userProfile}
-      source={{
-        uri: image,
-      }}
-    />
-    <View style={styles.leftContent}>
-      <Text style={styles.title}>{name}</Text>
-      <Text style={styles.content} numberOfLines={1}>
-        {message}
-      </Text>
-    </View>
-    <View>
-      <Text style={styles.time}>{time}</Text>
-
-      {unread == 0 ? (
-        <Text></Text>
-      ) : (
-        <View style={styles.unreadView}>
-          <Text style={styles.unread} numberOfLines={1}>
-            {unread}
-          </Text>
-        </View>
-      )}
-    </View>
-  </View>
-);
 export default function GroupScreen() {
+  
+const navigation = useNavigation();
+const Item = ({ name, image, message, unread, time }) => (
+  <Pressable
+    onPress={() => {
+      navigation.navigate("chat", { name, image });
+    }}
+  >
+    <View style={styles.item}>
+      <Image
+        style={styles.userProfile}
+        source={{
+          uri: image,
+        }}
+      />
+      <View style={styles.leftContent}>
+        <Text style={styles.title}>{name}</Text>
+        <Text style={styles.content} numberOfLines={1}>
+          {message}
+        </Text>
+      </View>
+      <View>
+        <Text style={styles.time}>{time}</Text>
+
+        {unread == 0 ? (
+          <Text></Text>
+        ) : (
+          <View style={styles.unreadView}>
+            <Text style={styles.unread} numberOfLines={1}>
+              {unread}
+            </Text>
+          </View>
+        )}
+      </View>
+    </View>
+  </Pressable>
+);
   const renderItem = ({ item }) => (
     <Item
       name={item.user.name}

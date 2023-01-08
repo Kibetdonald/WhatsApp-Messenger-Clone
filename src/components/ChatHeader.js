@@ -1,31 +1,49 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import React from "react";
 import { Ionicons, MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 
 export default function ChatHeader() {
-    const navigation = useNavigation();
-    const goBack = () => {
-      navigation.push("header");
-    };
+  const navigation = useNavigation();
+  const goBack = () => {
+    navigation.push("header");
+  };
+  const route = useRoute();
   return (
     <View style={styles.container}>
       <View style={styles.rightHeader}>
-        <Ionicons style={{paddingTop: 12}} onPress={goBack} name="arrow-back-outline" size={28} color="black" />
+        <Ionicons
+          style={{ paddingTop: 4 }}
+          onPress={goBack}
+          name="arrow-back-outline"
+          size={22}
+          color="#fff"
+        />
         <Image
-        style={styles.profile}
-        source={{
-          uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png',
-        }}
-      />
-      <Text style={styles.ProfileName}>Doreen</Text>
+          style={styles.profile}
+          source={{
+            uri: route.params.image,
+          }}
+        />
+        <Text style={styles.ProfileName}>{route.params.name}</Text>
+     
       </View>
       <View style={styles.leftHeader}>
         <Ionicons name="md-videocam-outline" size={26} color="white" />
         <View style={{ width: 20 }} />
         <FontAwesome name="phone" size={26} color="white" />
+
         <View style={{ width: 20 }} />
-        <MaterialIcons name="more-vert" size={24} color="white" />
+
+        <Pressable
+          onPress={() => navigation.navigate("Modal")}
+          style={({ pressed }) => ({
+            opacity: pressed ? 0.5 : 1,
+          })}
+        >
+          <MaterialIcons name="more-vert" size={24} color="white" />
+        </Pressable>
       </View>
     </View>
   );
@@ -48,16 +66,17 @@ const styles = StyleSheet.create({
   rightHeader: {
     flexDirection: "row",
   },
-  profile:{
+  profile: {
     borderRadius: 50,
-    width: 50,
-    paddingTop: -10,
+    resizeMode: 'stretch',
+    width: 45,
+    height: 45,
     marginLeft: 10,
   },
-  ProfileName:{
+  ProfileName: {
     color: "#fff",
     paddingTop: 10,
     paddingLeft: 10,
-    fontSize: 20
-  }
+    fontSize: 20,
+  },
 });

@@ -11,9 +11,8 @@ import chats from "../data/chats.json";
 import { useNavigation } from "@react-navigation/native";
 export default function MessageScreen() {
   const navigation = useNavigation();
-  const openChat = () => {
-    navigation.push("chat");
-  };
+
+
   const renderItem = ({ item }) => (
     <Item
       name={item.user.name}
@@ -25,7 +24,9 @@ export default function MessageScreen() {
   );
 
   const Item = ({ name, image, message, unread, time }) => (
-    <TouchableOpacity onPress={openChat}>
+    <TouchableOpacity onPress={()=>{
+      navigation.navigate("chat", {name, image})
+    }}>
       <View style={styles.item}>
         <Image
           style={styles.userProfile}

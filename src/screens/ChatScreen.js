@@ -5,7 +5,8 @@ import {
   StyleSheet,
   FlatList,
 } from "react-native";
-import React from "react";
+import { useRoute, useNavigation } from "@react-navigation/native";
+import React, { useEffect } from "react";
 import ChatHeader from "../components/ChatHeader";
 import messages from "../data/messages.json";
 import dayjs from "dayjs";
@@ -14,6 +15,12 @@ import SendMessage from "../components/SendMessage";
 dayjs.extend(relativeTime);
 
 export default function ChatScreen() {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const { myname } = route.params;
+  console.log(myname);
+
+
   const renderItem = ({ item }) => (
     <Item text={item.text} createdAt={item.createdAt} userId={item.userId} />
   );
@@ -38,6 +45,7 @@ export default function ChatScreen() {
       style={styles.image}
     >
       <ChatHeader />
+      <Text>{myname}</Text>
       <FlatList
         data={messages}
         renderItem={renderItem}
